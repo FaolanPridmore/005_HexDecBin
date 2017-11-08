@@ -1,46 +1,101 @@
-import java.util.Scanner;
+//import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class BinPower {
-	
-	Scanner input = new Scanner(System.in);
-	
-	/*
-	 * String is cap reason: it is a class
-	 * int isn't cap reason: its primitive, meaning it isn't a class
-	 * Integer is cap reason: it is a class
-	 * 
-	 */
+
+	private String messanger;
+	//Scanner inp = new Scanner(System.in);
 	
 	public BinPower() {
-		
-		
-		
+		//placeholderr
 	}
 	
 	public void setBinary() {
-		String name = "";
+		
+		
+		String name = "False";
 		double exp;
 		double base;
-		int ans;
-		System.out.println("Welcome to my Hexadecimal, Decimal, or "
-				+ "Binary conversion program");
-		System.out.println("What is your name?");
-		name = input.nextLine();
-		System.out.println("Very nice to meet you " + name + "! Please enter a base to modify.");
-		base = input.nextDouble();
-		System.out.println("The base you entered was " + base + " Please enter an exponent to modify it.");
-		exp = input.nextDouble();
+		double ans;
+		
+		
+		/*
+		String is class. (capitalized)
+		double & int is 'primitive' type. (lowercase)
+		but Integer (capped) is Class. 
+		int =/= Integer
+		
+		*/
+		if (name != "False") {
+			name = JOptionPane.showInputDialog("Please Enter Name:");
+		
+			messanger = ("Thank you for using my program, " + name + ", let's begin.");
+			JOptionPane.showMessageDialog(null, messanger);
+		}
+		
+		/*
+		System.out.println("Enter base for exponent:");
+		try {
+			
+			base = inp.nextDouble();
+			System.out.println("You have entered " + (int) base);
+			
+		} catch(Exception err){
+			System.out.println(err + " - value defaulted to 0.");
+			base = 0;
+		}
+		*/
+		try {
+			base = Double.valueOf(JOptionPane.showInputDialog("Enter base for exponent:"));
+		} catch(Exception err) {
+			messanger = (err + " - value defaulted to 0");
+			JOptionPane.showMessageDialog(null, messanger);
+			base = 0;
+		}
+		
+		try {
+			exp = Double.valueOf(JOptionPane.showInputDialog("Enter exponent for " + (int) base + ":"));
+		} catch(Exception err) {
+			messanger = (err + " - value defaulted to 0");
+			JOptionPane.showMessageDialog(null, messanger);
+			exp = 0;
+		}
 		
 		
 		
-		System.out.println("The exponent you chose was: " + exp);
+		/*
+		System.out.println("Enter exponent for " + (int) base + ":");
+		try {
+			
+			exp = inp.nextDouble();
+			System.out.println("You have entered " + (int) exp);
+			
+		} catch(Exception err){
+			System.out.println(err + " - value defaulted to 0.");
+			exp = 0;
+		}
+		*/
 		
+		// (String) Typecasting. really important.
+		// Converts variables
+		ans = Math.pow(base, exp);
+		//System.out.println("Answer is " + (int) (ans + 0.5));
+		if (ans >= 2147483647) {
+			messanger = ("Answer is too high to calculate");
+			JOptionPane.showMessageDialog(null, messanger);
+		} else {
+			messanger = ("Answer is " + (int) (ans + 0.5));
+			JOptionPane.showMessageDialog(null, messanger);
+		}
 		
-		// (int) "Type Casting" -- pow requires double, which makes no snese in binary 
-		// so type cast to get right answer
-		ans = (int)Math.pow(base, exp);
-		System.out.println("The answer is " + ans);
+		if ((ans % 1) != 0) {
+			//System.out.println("Exact answer is " + (ans));
+			
+			messanger = ("Exact answer is " + (ans));
+			JOptionPane.showMessageDialog(null, messanger);
+		}
+		
 		
 	}
-	
 }
